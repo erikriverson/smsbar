@@ -1,5 +1,5 @@
 #' sms_bar
 #'
-#' @name sms_bar
+#' @name smsbar
 #' @docType package
 NULL
