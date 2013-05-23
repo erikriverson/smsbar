@@ -11,4 +11,4 @@ Depends:
     R (>= 3.0.0)
 License: GPL 2 or later
 Collate:
-    'smsbar-package.r'
+    'smsbar-package.R'

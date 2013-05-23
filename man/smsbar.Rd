@@ -1,9 +1,9 @@
 \docType{package}
-\name{sms_bar}
-\alias{sms_bar}
-\alias{sms_bar-package}
-\title{sms_bar}
+\name{smsbar}
+\alias{smsbar}
+\alias{smsbar-package}
+\title{smsbar}
 \description{
-  sms_bar
+  smsbar
 }
 
