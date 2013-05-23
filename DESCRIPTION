@@ -1,0 +1,14 @@
+Package: smsbar
+Title: Load, summarize, and produce graphics from your SMS Backup & Restore XML
+    export files.
+Version: 0.1
+Authors@R: person("Erik", "Iverson",
+    email = "erik@sigmafield.org", role = c("aut", "cre"))
+Description: The SMS Backup & Restore app for Android devices creates
+    an XML file of your SMS message history. This package allows you to
+    analyze those data.
+Depends:
+    R (>= 3.0.0)
+License: GPL 2 or later
+Collate:
+    'sms_bar-package.r'
