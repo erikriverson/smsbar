@@ -12,12 +12,14 @@ NULL
 ##' @param file path name to XML file created by SMS Backup & Restore
 ##' @return data.frame of SMS text messages, with one row per message
 ##' @author Erik Iverson
-read.smsbar <- function(file, return_all = FALSE, fix_address = TRUE) {
+read.smsbar <- function(file, return_all = FALSE, us_numbers = TRUE) {
 
+  ## read in XML file 
   sms_data <- xmlInternalTreeParse("/home/eiverson/src/sms/data/test2.xml")
   sms_list <- xmlToList(sms_data)
   df <- as.data.frame(do.call(rbind, sms_list[-length(sms_list)]))
 
+  ## fix up dates 
   df$date_time_rcvd <- as.POSIXct(as.numeric(substr(df$date, 1 , 10)),
                              origin = "1970-01-01",
                              tz = "GMT")
@@ -25,6 +27,13 @@ read.smsbar <- function(file, return_all = FALSE, fix_address = TRUE) {
   df$date_time_sent <- as.POSIXct(as.numeric(substr(df$date_sent, 1 , 10)),
                                   origin = "1970-01-01",
                                   tz = "GMT")
+
+  ## derive some other helpful variables 
+  df$type <- factor(df$type, levels = c("1", "2", "3"),
+                    labels = c("Incoming", "Outgoing", "Other"))
+  df$type[is.na(df$type)] <- "Other"
+  df$body <- as.character(df$body)
+  df$length <- nchar(df$body)
 
   ## remove unhelpful columns from the data.frame
   if(!return_all) {
@@ -41,11 +50,9 @@ read.smsbar <- function(file, return_all = FALSE, fix_address = TRUE) {
     df$date_sent <- NULL
   }
 
-  df$type <- factor(df$type, levels = c("1", "2", "3"),
-                    labels = c("Incoming", "Outgoing", "Other"))
-  df$type[is.na(df$type)] <- "Other"
-  df$body <- as.character(df$body)
-  df$length <- nchar(df$body)
+  ## canonicolize the address field for US phone numbers
+  if(us_numbers)
+    df$address <- as.factor(gsub("^\\+?1", "", df$address))
     
   df
 }
