@@ -2,8 +2,8 @@
 \name{smsbar}
 \alias{smsbar}
 \alias{smsbar-package}
-\title{smsbar}
+\title{sms_bar}
 \description{
-  smsbar
+  sms_bar
 }
 

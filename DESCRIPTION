@@ -8,7 +8,8 @@ Description: The SMS Backup & Restore app for Android devices creates
     an XML file of your SMS message history. This package allows you to
     analyze those data.
 Depends:
-    R (>= 3.0.0)
-License: GPL 2 or later
+    R (>= 3.0.0),
+    XML
+License: GPL (>= 2)
 Collate:
     'smsbar-package.R'
