@@ -15,7 +15,7 @@ NULL
 read.smsbar <- function(file, return_all = FALSE, us_numbers = TRUE) {
 
   ## read in XML file 
-  sms_data <- xmlInternalTreeParse("/home/eiverson/src/sms/data/test2.xml")
+  sms_data <- xmlInternalTreeParse(file)
   sms_list <- xmlToList(sms_data)
   df <- as.data.frame(do.call(rbind, sms_list[-length(sms_list)]))
 
