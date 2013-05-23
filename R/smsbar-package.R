@@ -56,3 +56,13 @@ read.smsbar <- function(file, return_all = FALSE, us_numbers = TRUE) {
     
   df
 }
+
+sms_plot <- function(data, inc_unk = TRUE) {
+  data <- data.table(data)
+  setkeyv(data, c("contact_name", "date_time_rcvd"))
+  daily_data <- data[, list(date = unique(as.Date(date_time_rcvd)),
+                            n_texts = cumsum(table(as.Date(date_time_rcvd)))),
+                     by = "contact_name"]
+  ggplot(daily_data, aes(x = date, y = n_texts, colour = contact_name)) +
+    geom_line() + theme_bw()
+}
